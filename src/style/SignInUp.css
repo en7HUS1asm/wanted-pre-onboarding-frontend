@@ -1,0 +1,45 @@
+.container_1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+    min-height: 300px;
+    width: 40vw;
+    min-width: 600px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    margin: auto;
+    margin-top: 30vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input_1 {
+    width: 80%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button_1 {
+    padding: 10px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: olive;
+    color: white;
+    cursor: pointer;
+}
+
+.button_1:enabled:hover {
+    background-color: darkolivegreen;
+    /* 마우스 호버 시 다크 블루색 적용 */
+    color: white;
+    /* 글자색 유지 */
+}
+
+.button_1:disabled {
+    background-color: gray;
+    cursor: default;
+}
