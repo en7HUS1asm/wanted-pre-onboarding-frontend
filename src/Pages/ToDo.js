@@ -31,16 +31,14 @@ function ToDo() {
         navigate('/');
         console.log('로그아웃되어 초기화면으로 이동합니다')
     }
-    const today = new Date();
 
     // 날짜
+    const today = new Date();
     const dateString = today.toLocaleString('ko-KR', {
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
-
-    // 요일
     const dayName = today.toLocaleString('ko-KR', { weekday: 'long' });
 
     // To do update
@@ -62,13 +60,13 @@ function ToDo() {
         return todos.map(todo => (
             <li key={todo.id}>
                 <label>
-                    <input type="checkbox" checked={todo.isComplete} />
+                    <input type="checkbox" checked={todo.isCompleted} onChange={() => handleCheckboxChange(todo)} />
                     {todo.isEditing ? (
                         <>
-                            <input value={todo.todo} onChange={(e) => handleEditInputChange(e, todo)}
+                            <input value={todo.todo} data-testid="modify-input" onChange={(e) => handleEditInputChange(e, todo)}
                             />
-                            <button onClick={() => handleEditComplete(todo)}>수정 완료</button>
-                            <button onClick={() => handleEditCancel(todo)}>취소</button>
+                            <button data-testid="submit-button" onClick={() => handleEditComplete(todo)}>제출</button>
+                            <button data-testid="cancel-button" onClick={() => handleEditCancel(todo)}>취소</button>
                         </>
                     ) : (
                         <>
@@ -100,6 +98,7 @@ function ToDo() {
             const response = await axios.post(apiUrl, data, { headers });
 
             console.log('추가성공', response.data);
+            setNewTodo('')
             fetchTodos()
         } catch (error) {
             console.error('추가 실패', error);
@@ -152,13 +151,14 @@ function ToDo() {
         const updatedTodos = todos.map((t) =>
             t.id === todo.id ? { ...t, isEditing: false } : t
         );
+        fetchTodos();
     };
 
     // 삭제
     const handleDeleteTodo = async (todoId) => {
         try {
             const token = localStorage.getItem('token');
-            const apiUrl = `https://www.pre-onboarding-selection-task.shop/todos/${todoId}`;
+            const apiUrl = `https://www.pre-onboarding-selection-task.shop/todos/${todoId.id}`;
             const headers = {
                 Authorization: `Bearer ${token}`,
             };
@@ -172,6 +172,31 @@ function ToDo() {
             }
         } catch (error) {
             console.error('삭제 실패', error);
+        }
+    };
+
+    // 체크박스 상태가 변경될 때 호출되는 함수
+    const handleCheckboxChange = async (todo) => {
+        try {
+            const token = localStorage.getItem('token');
+            const apiUrl = `https://www.pre-onboarding-selection-task.shop/todos/${todo.id}`;
+
+            const data = {
+                todo: todo.todo,
+                isCompleted: !todo.isCompleted, // 현재 상태의 반대로 변경
+            };
+
+            const headers = {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            };
+
+            const response = await axios.put(apiUrl, data, { headers });
+
+            console.log('상태 변경 완료', response.data);
+            fetchTodos();
+        } catch (error) {
+            console.error('상태 변경 실패', error);
         }
     };
 

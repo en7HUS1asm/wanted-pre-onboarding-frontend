@@ -17,12 +17,26 @@
 
 .container_3 {
     margin-top: 270px;
-    margin-left:-500px;
+    margin-left:-550px;
     text-align: left;
 }
 
 .container_3 .day {
     margin-left: 30px; /* 원하는 간격 설정 */
+}
+
+.container_4 {
+    width:60%;
+}
+
+.container_4 input {
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 10px;
+    width: 500px;
+    height:40px;
+    margin:0px 20px 0px 20px;
+    font-size:20px;
+    padding: 0px 10px 0px 10px;
 }
 
 .container_5 {
@@ -31,4 +45,13 @@
     overflow-y: auto;
     text-align:left;
     margin-left:0px;
+}
+
+li {
+    height:40px;
+    font-size:13px;
+}
+
+li button {
+    margin : 0px 0px 0px 15px;
 }

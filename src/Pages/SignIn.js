@@ -56,7 +56,7 @@ function SignIn() {
         <div className='container_1'>
             <h1 className='maintext'>로그인 페이지</h1>
             <input className="input_1" data-testid="email-input" placeholder='EMAIL를 입력하세요' value={email} onChange={handleEmailChange} />
-            <input className="input_1" data-testid="password-input" placeholder='PW를 입력하세요' value={password} onChange={handlePasswordChange} />
+            <input className="input_1" data-testid="password-input" type="password" placeholder='PW를 입력하세요' value={password} onChange={handlePasswordChange} />
             <button className="button_1" data-testid="signin-button" disabled={!isFormValid} onClick={handleSigninbuttonClick}>로그인</button>
         </div>
     );
