@@ -16,9 +16,6 @@ function App() {
           <Route path="/todo" element={<ToDo />} />
         </Routes>
       </Router>
-      <div>
-        hello
-      </div>
     </div>
   );
 }
